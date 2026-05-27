@@ -1,0 +1,839 @@
+<!--
+  ARCHETYPE: Refined Minimal / Typographic Editorial
+  STRUCTURAL DECISIONS:
+  - Full-bleed left-aligned hero: business name in large tracked caps, tagline below, no overlay photo
+  - Horizontal hairline rule nav, flush left wordmark
+  - Services presented as a numbered list with em-dash price lines — no icons, no cards
+  - Photo strip: edge-to-edge horizontal scroll gallery, no captions
+  - Testimonies: two-column alternating pull-quote layout, no cards, no avatars, no stars
+  - Hours & Map: side-by-side split panel with hairline separator
+  - Animation: single fade-in on hero only (0.6s opacity), everything else static
+  - Palette: near-monochrome — off-white (#F5F3EF) bg, near-black (#1A1A18) text, warm taupe (#C2AE98) accent
+  - Typography: "Cormorant Garamond" (display/quotes) + "DM Sans" (body/nav/labels)
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pasadena Barber Shop — Pasadena, CA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F5F3EF;
+      --ink:      #1A1A18;
+      --ink-mid:  #5A5752;
+      --ink-soft: #9A9590;
+      --accent:   #C2AE98;
+      --rule:     #D8D4CE;
+      --white:    #FDFCFA;
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'DM Sans', system-ui, sans-serif;
+      --max:      1200px;
+      --gutter:   clamp(1.5rem, 5vw, 4rem);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 var(--gutter);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-wordmark {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink-mid);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-cta {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      border: 1px solid var(--ink);
+      padding: 0.45rem 1.1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--ink); color: var(--bg); }
+
+    .nav-mobile-cta { display: none; }
+
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .nav-mobile-cta { display: block; }
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding-top: 56px;
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 0;
+    }
+
+    .hero-text {
+      padding: var(--gutter);
+      padding-top: clamp(4rem, 10vw, 8rem);
+      padding-bottom: clamp(3rem, 6vw, 5rem);
+      opacity: 0;
+      animation: heroFadeIn 0.8s 0.15s ease forwards;
+    }
+
+    @keyframes heroFadeIn {
+      to { opacity: 1; }
+    }
+
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .hero-tagline {
+      font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+      font-weight: 300;
+      color: var(--ink-mid);
+      max-width: 34ch;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--white);
+      background: var(--ink);
+      padding: 0.9rem 2.2rem;
+      border: 1px solid var(--ink);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-primary:hover { background: transparent; color: var(--ink); }
+
+    .hero-image {
+      height: 100%;
+      min-height: 70vh;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero-image {
+        min-height: 55vw;
+        order: -1;
+      }
+      .hero-text {
+        padding-top: 2.5rem;
+      }
+    }
+
+    /* ─── SECTION COMMON ─── */
+    section {
+      padding: clamp(4rem, 8vw, 7rem) var(--gutter);
+      max-width: calc(var(--max) + var(--gutter) * 2);
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-label::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 2rem;
+      background: var(--accent);
+    }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 6rem);
+      align-items: start;
+    }
+
+    .about-heading {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+    }
+
+    .about-heading em { font-style: italic; }
+
+    .about-body {
+      padding-top: 0.5rem;
+    }
+
+    .about-body p {
+      color: var(--ink-mid);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-body p:last-child { margin-bottom: 0; }
+
+    @media (max-width: 700px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── PHOTO STRIP ─── */
+    .photo-strip-wrapper {
+      width: 100%;
+      overflow: hidden;
+      padding: 0;
+      max-width: none;
+    }
+
+    .photo-strip {
+      display: flex;
+      gap: 3px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .photo-strip::-webkit-scrollbar { display: none; }
+
+    .photo-strip figure {
+      flex: 0 0 auto;
+      width: clamp(240px, 35vw, 480px);
+      aspect-ratio: 3/4;
+      overflow: hidden;
+    }
+
+    .photo-strip figure:first-child {
+      width: clamp(320px, 50vw, 640px);
+      aspect-ratio: 4/3;
+    }
+
+    .photo-strip img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .photo-strip figure:hover img { transform: scale(1.03); }
+
+    /* ─── SERVICES ─── */
+    .services-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: clamp(2rem, 6vw, 6rem);
+      align-items: start;
+    }
+
+    .services-intro h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .services-intro h2 em { font-style: italic; }
+
+    .services-intro p {
+      font-size: 0.9rem;
+      color: var(--ink-mid);
+      line-height: 1.75;
+    }
+
+    .services-list {
+      list-style: none;
+      border-top: 1px solid var(--rule);
+    }
+
+    .service-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--rule);
+      gap: 1.5rem;
+    }
+
+    .service-num {
+      font-family: var(--serif);
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      width: 1.8rem;
+    }
+
+    .service-name {
+      flex: 1;
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    .service-detail {
+      font-size: 0.8rem;
+      color: var(--ink-mid);
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    @media (max-width: 700px) {
+      .services-layout { grid-template-columns: 1fr; }
+    }
+
+    /* ─── TESTIMONIES ─── */
+    #testimonies {
+      background: var(--ink);
+      color: var(--bg);
+      max-width: none;
+    }
+
+    #testimonies .section-label { color: var(--accent); }
+    #testimonies .section-label::after { background: var(--accent); }
+
+    .testimonies-inner {
+      max-width: calc(var(--max) + var(--gutter) * 2);
+      margin: 0 auto;
+    }
+
+    .testimonies-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 5rem);
+      margin-top: 3rem;
+    }
+
+    .testimony {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 2rem;
+    }
+
+    .testimony blockquote {
+      font-family: var(--serif);
+      font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--bg);
+      margin-bottom: 1.5rem;
+    }
+
+    .testimony blockquote::before {
+      content: '\201C';
+      font-size: 1.8em;
+      line-height: 0;
+      vertical-align: -0.35em;
+      color: var(--accent);
+      margin-right: 0.1em;
+    }
+
+    .testimony-attr {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    @media (max-width: 700px) {
+      .testimonies-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── HOURS & MAP ─── */
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 6rem);
+      align-items: start;
+    }
+
+    .location-heading {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+
+    .location-heading em { font-style: italic; }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-bottom: 2rem;
+    }
+
+    .hours-table tr { border-bottom: 1px solid var(--rule); }
+    .hours-table tr:first-child { border-top: 1px solid var(--rule); }
+
+    .hours-table td {
+      padding: 0.7rem 0;
+      color: var(--ink-mid);
+    }
+
+    .hours-table td:first-child {
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      padding-right: 1.5rem;
+    }
+
+    .hours-table td.closed { color: var(--ink-soft); font-style: italic; }
+
+    .address-block {
+      font-size: 0.88rem;
+      color: var(--ink-mid);
+      line-height: 1.8;
+    }
+
+    .address-block a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
+      text-underline-offset: 3px;
+    }
+
+    .map-frame {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border: none;
+      display: block;
+      filter: grayscale(0.4) contrast(0.95);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink-mid);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.2rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .social-link:hover { color: var(--ink); border-color: var(--ink); }
+
+    @media (max-width: 700px) {
+      .location-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── CONTACT / SECOND CTA ─── */
+    #contact {
+      border-top: 1px solid var(--rule);
+      padding-top: clamp(4rem, 8vw, 7rem);
+      padding-bottom: clamp(4rem, 8vw, 7rem);
+      text-align: center;
+      max-width: none;
+      background: var(--bg);
+    }
+
+    .contact-inner {
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    #contact .section-label { justify-content: center; }
+    #contact .section-label::after { display: none; }
+    #contact .section-label::before {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 2rem;
+      background: var(--accent);
+    }
+
+    .contact-heading {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-heading em { font-style: italic; }
+
+    .contact-sub {
+      font-size: 0.95rem;
+      color: var(--ink-mid);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .contact-phone {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 300;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 0.15rem;
+      display: inline-block;
+      margin-bottom: 2rem;
+      transition: border-color 0.2s;
+    }
+
+    .contact-phone:hover { border-color: var(--ink); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 1.75rem var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      max-width: none;
+    }
+
+    .footer-credit {
+      font-size: 0.72rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.03em;
+    }
+
+    .footer-credit a {
+      color: var(--ink-mid);
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
+      text-underline-offset: 2px;
+    }
+
+    .footer-address {
+      font-size: 0.72rem;
+      color: var(--ink-soft);
+      text-align: right;
+    }
+
+    @media (max-width: 540px) {
+      .footer-address { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-wordmark" href="#top">Pasadena Barber Shop</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#location">Hours</a></li>
+      <li><a href="#testimonies">Testimonies</a></li>
+    </ul>
+    <a class="nav-cta" href="tel:+16267947061">Call Now</a>
+    <a class="nav-mobile-cta nav-cta" href="tel:+16267947061">Call</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="top" class="hero" style="padding: 0; max-width: none;">
+    <div class="hero-text" style="padding: var(--gutter); padding-top: clamp(5rem, 12vw, 9rem); padding-bottom: clamp(3.5rem, 7vw, 6rem);">
+      <p class="hero-eyebrow">North Lake Ave &mdash; Pasadena, CA</p>
+      <h1 class="hero-name">Pasadena<br /><em>Barber</em><br />Shop</h1>
+      <p class="hero-tagline">A neighborhood institution on North Lake Ave. Precise cuts, unhurried service, and the kind of attention to craft that keeps people coming back.</p>
+      <a class="btn-primary" href="tel:+16267947061">Call Now &nbsp;&mdash;&nbsp; (626) 794-7061</a>
+    </div>
+    <div class="hero-image">
+      <img
+        src="https://lh3.googleusercontent.com/places/ANXAkqGdQJNGm7C9yCnElMK-cts_MfCnIZcRbDu1FWOHJbWg0BEs9R_VLiP7Nzrvp9MByEjF83yBpi7NhVM71b493GCkgrIMyV2yxdw=s4800-w1600"
+        alt="Inside Pasadena Barber Shop"
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div>
+        <p class="section-label">About</p>
+        <h2 class="about-heading">Craft<br /><em>without</em><br />compromise.</h2>
+      </div>
+      <div class="about-body">
+        <p>Pasadena Barber Shop has been a fixture on North Lake Avenue for years — a quiet counter to the flash of chain salons. What keeps clients returning isn't spectacle. It's the same consistent hand, the same unhurried attention, every visit.</p>
+        <p>The barbers here — Rustem, Samantha, and the rest of the team — build relationships the old-fashioned way: by listening, by showing up, and by putting the work in every time. Whether it's a clean fade for the week ahead or a sharp cut timed to a wedding day, the standard stays the same.</p>
+        <p>Walk-ins welcome. Appointments preferred.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO STRIP -->
+  <div class="photo-strip-wrapper">
+    <div class="photo-strip">
+      <figure>
+        <img
+          src="https://lh3.googleusercontent.com/place-photos/AJRVUZMKF5-0om-csKka_LsVeBV4IaAV1TFYFD2eqzRmRw4CwJByCSQ1K1oq0D1ah5xyS2OwjpFaC7YzZqbLRD-CngxJcv06GAAHGZQK4e_SwIla5pSczKWgm7eQb2V819jePdv3gxGgh6ebCVrY4v0=s4800-w1600"
+          alt="Barber at work"
+          loading="lazy"
+        />
+      </figure>
+      <figure>
+        <img
+          src="https://lh3.googleusercontent.com/places/ANXAkqHaisM7t-DEpaklY3athQ_eqOWK4ewMzjelqB86PBmqgA1y4k4tZ4fTnY2oKbYTeSWERN7f-5E-K-HqaLlv6VrqTdmSey-hoNM=s4800-w1125"
+          alt="Barbershop interior"
+          loading="lazy"
+        />
+      </figure>
+      <figure>
+        <img
+          src="https://lh3.googleusercontent.com/places/ANXAkqETysiMZGGsZOoMipozMRskKnRNxxeWFvc4K1cSe5dZNmr4dmOZtuUKGV_8BkwS_0ermXiJqAevHTEWzWSn57KIYegG1UuY5sA=s4800-w1080"
+          alt="Haircut in progress"
+          loading="lazy"
+        />
+      </figure>
+      <figure>
+        <img
+          src="https://lh3.googleusercontent.com/places/ANXAkqFD-i4_sIKoDuHllc8RramHueJdcZGurPhOkBjpySRUnvJuTQOyYqX60OgHvKun6e4xhBggUBIGTYhWXKCkWKToF1Qme-79Z3M=s4800-w1600"
+          alt="Pasadena Barber Shop storefront"
+          loading="lazy"
+        />
+      </figure>
+      <figure>
+        <img
+          src="https://lh3.googleusercontent.com/places/ANXAkqH-ZPg5vIUGZ9CfYTUvJ7vJpHMVgLob7dCfSpC2w1ZOIJD1PhCtRNGah1Fio4OhkPX2l_38MMbbanca8dvRtTJjqYMrr6p2dOY=s4800-w1076"
+          alt="Detail of barbershop tools"
+          loading="lazy"
+        />
+      </figure>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="services-layout">
+      <div class="services-intro">
+        <p class="section-label">Services</p>
+        <h2><em>The</em><br />full menu.</h2>
+        <p>Classic services executed with precision. No upsells, no distractions — just the work.</p>
+      </div>
+      <div>
+        <ul class="services-list">
+          <li class="service-item">
+            <span class="service-num">01</span>
+            <span class="service-name">Haircut</span>
+            <span class="service-detail">Scissor &amp; clipper</span>
+          </li>
+          <li class="service-item">
+            <span class="service-num">02</span>
+            <span class="service-name">Fade</span>
+            <span class="service-detail">Skin, low &amp; mid</span>
+          </li>
+          <li class="service-item">
+            <span class="service-num">03</span>
+            <span class="service-name">Beard Trim &amp; Shape</span>
+            <span class="service-detail">With lineup</span>
+          </li>
+          <li class="service-item">
+            <span class="service-num">04</span>
+            <span class="service-name">Hot Towel Shave</span>
+            <span class="service-detail">Straight razor finish</span>
+          </li>
+          <li class="service-item">
+            <span class="service-num">05</span>
+            <span class="service-name">Kids Cut</span>
+            <span class="service-detail">12 &amp; under</span>
+          </li>
+          <li class="service-item">
+            <span class="service-num">06</span>
+            <span class="service-name">Hair Color &amp; Touch-Up</span>
+            <span class="service-detail">Gray coverage</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIES -->
+  <section id="testimonies" style="padding: clamp(4rem, 8vw, 7rem) var(--gutter);">
+    <div class="testimonies-inner">
+      <p class="section-label">In Their Words</p>
+      <div class="testimonies-grid">
+
+        <div class="testimony">
+          <blockquote>If you come here you gotta book an appointment with Rustem! He is my favorite barber and the only one I go to in all of Los Angeles!</blockquote>
+          <p class="testimony-attr">Mohammad A.</p>
+        </div>
+
+        <div class="testimony">
+          <blockquote>Samantha has been my go-to barber for the last year, she always does a solid job. She cut my hair before my wedding and it came out amazing in the photos.</blockquote>
+          <p class="testimony-attr">Jordan B.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS & LOCATION -->
+  <section id="location">
+    <div class="location-grid">
+      <div>
+        <p class="section-label">Hours &amp; Location</p>
+        <h2 class="location-heading">Find<br /><em>us</em> here.</h2>
+
+        <table class="hours-table">
+          <tbody>
+            <tr><td>Monday</td><td>9:00 AM – 6:00 PM</td></tr>
+            <tr><td>Tuesday</td><td>9:00 AM – 6:00 PM</td></tr>
+            <tr><td>Wednesday</td><td>9:00 AM – 6:00 PM</td></tr>
+            <tr><td>Thursday</td><td>9:00 AM – 6:00 PM</td></tr>
+            <tr><td>Friday</td><td>8:00 AM – 6:00 PM</td></tr>
+            <tr><td>Saturday</td><td>8:00 AM – 5:00 PM</td></tr>
+            <tr><td>Sunday</td><td class="closed">Closed</td></tr>
+          </tbody>
+        </table>
+
+        <div class="address-block">
+          <p>1359 N Lake Ave<br />Pasadena, CA 91104</p>
+          <p style="margin-top: 0.6rem;">
+            <a href="https://maps.google.com/?cid=17813687280329485012" target="_blank" rel="noopener">View on Google Maps</a>
+          </p>
+        </div>
+
+        <div class="social-links">
+          <a class="social-link" href="https://maps.google.com/?cid=17813687280329485012&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA" target="_blank" rel="noopener">Google</a>
+        </div>
+      </div>
+
+      <div>
+        <iframe
+          class="map-frame"
+          title="Pasadena Barber Shop location map"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=Pasadena+Barber+Shop,1359+N+Lake+Ave,Pasadena,CA+91104"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / SECOND CTA -->
+  <section id="contact" style="padding: clamp(4rem, 8vw, 7rem) var(--gutter);">
+    <div class="contact-inner">
+      <p class="section-label" style="justify-content: center;">Book Your Cut</p>
+      <h2 class="contact-heading">Ready<br /><em>when you are.</em></h2>
+      <p class="contact-sub">Call to book your appointment or stop by the shop. Walk-ins are always welcome when the chair is open.</p>
+      <a class="contact-phone" href="tel:+16267947061">(626) 794-7061</a>
+      <br />
+      <a class="btn-primary" href="tel:+16267947061">Call Now</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-credit">
+      Mockup designed by LJ Sites &mdash; interested in making this yours?
+      <a href="mailto:jcpeng2002@gmail.com">jcpeng2002@gmail.com</a>
+    </p>
+    <p class="footer-address">1359 N Lake Ave, Pasadena CA 91104</p>
+  </footer>
+
+</body>
+</html>
